@@ -1,7 +1,7 @@
 package com.sams.test.products;
 
 /**
- * Created by deepu on 8/29/2018.
+ * Used to display about me, currently not shown
  */
 
 import android.content.res.Configuration;

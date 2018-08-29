@@ -9,5 +9,6 @@
             android:id="@+id/about_me"
             android:icon="@drawable/ic_user_image"
             android:title="about me"
+            android:visible="false"
             app:showAsAction="ifRoom"/>
     </menu>
