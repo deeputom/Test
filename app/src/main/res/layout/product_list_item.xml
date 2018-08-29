@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    cardview:cardCornerRadius="2dp"
+    cardview:cardElevation="3dp"
+    cardview:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:id="@+id/product_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/product_thumbnail"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="100dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_height="200dp" />
+            <TextView
+                android:id="@+id/product_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Rating"
+                android:layout_toRightOf="@+id/product_thumbnail"
+                android:layout_centerVertical="true"
+                android:textColor="#444"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:layout_alignTop="@+id/product_thumbnail"
+                android:layout_alignLeft="@+id/product_rating"
+                android:layout_alignStart="@+id/product_rating"
+                android:textColor="#444"
+                tools:text="Price"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/product_short_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:layout_marginBottom="10dp"
+                android:layout_alignLeft="@+id/product_rating"
+                android:layout_alignBottom="@+id/product_thumbnail"
+                android:layout_alignStart="@+id/product_rating"
+                tools:text="descripton of loing ad klasnlksadsfdn/lfnlnf /n"
+                android:textColor="#444"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+
+
+    <!--LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/product_thumbnail"
+            android:layout_width="100dp"
+            android:layout_height="200dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/product_image"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+    </LinearLayout-->
+</android.support.v7.widget.CardView>
