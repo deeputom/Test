@@ -17,6 +17,11 @@
 package com.sams.test.products;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +38,17 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_TASK_ID = "TASK_ID";
 
+    /**
+     * The pager widget, which handles animation and allows swiping horizontally to access previous
+     * and next wizard steps.
+     */
+    private ViewPager mPager;
+
+    /**
+     * The pager adapter, which provides the pages to the view pager widget.
+     */
+    private PagerAdapter mPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +61,37 @@ public class ProductDetailActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
-        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
 
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+
+        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
         // add fragment to the fragment container layout
         getSupportFragmentManager().beginTransaction().replace(R.id.product_detail_fragment_container,
                 productDetailFragment).commit();
         productDetailFragment.showProductDetails(
                 ProductInfo.getFromBundle(getIntent().getExtras()));
+    }
+
+    /**
+     *
+     */
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return new ProductDetailFragment();
+        }
+
+        @Override
+        public int getCount() {
+            return 10;
+        }
     }
 
     @Override
