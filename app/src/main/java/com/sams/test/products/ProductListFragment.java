@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sams.test.AboutMeActivity;
 import com.sams.test.R;
 import com.sams.test.ViewConstants;
 import com.sams.test.data.productinfojson.ProductInfo;
@@ -124,7 +125,7 @@ public class ProductListFragment extends Fragment implements IProductContract.Vi
                 loadMore();
                 break;
             case R.id.about_me:
-                Intent intent = new Intent(getActivity(), com.sams.test.products.AboutMeActivity.class);
+                Intent intent = new Intent(getActivity(), AboutMeActivity.class);
                 getActivity().startActivity(intent);
                 break;
         }
