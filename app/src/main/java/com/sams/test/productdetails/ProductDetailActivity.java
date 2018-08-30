@@ -80,7 +80,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         mCurrentPosition = getIntent().getIntExtra(ViewConstants.PROD_LIST_POSITION, 0);
         int totalSize = getIntent().getIntExtra(ViewConstants.CURR_TOTAL_SIZE, 0);
         //Since we can only start from mCurrentPosition till the end
-        mCurrentTotalSize = mCurrentTotalSize - (mCurrentTotalSize-1-mCurrentPosition);
+        mCurrentTotalSize = totalSize - (totalSize-1-mCurrentPosition);
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
