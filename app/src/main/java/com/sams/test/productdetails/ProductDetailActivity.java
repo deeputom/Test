@@ -87,8 +87,8 @@ public class ProductDetailActivity extends AppCompatActivity {
      }
 
     /**
-     * Swipe view works only from the starting postion to the end where the list is loaded.
-     * Swipe cannot go back the place where the swipe is started.
+     * Swipe view works only from the starting position to the end where the list is loaded.
+     * Swipe cannot go beyond the item where the swipe is started.
      * Also it cannot load the the items that is not yet downloaded
      */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
