@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sams.test.products;
+package com.sams.test.productdetails;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +29,7 @@ import android.support.v7.widget.Toolbar;
 import com.sams.test.R;
 import com.sams.test.data.ProductsRepository;
 import com.sams.test.data.productinfojson.ProductInfo;
+import com.sams.test.products.ProductDetailFragment;
 
 /**
  * Displays Product details screen.
@@ -63,9 +64,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         ab.setDisplayShowHomeEnabled(true);
 
         // Instantiate a ViewPager and a PagerAdapter.
-        mPager = (ViewPager) findViewById(R.id.pager);
+/*        mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
+        mPager.setAdapter(mPagerAdapter);*/
 
         ProductDetailFragment productDetailFragment = new ProductDetailFragment();
         // add fragment to the fragment container layout

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.sams.test.R;
 import com.sams.test.data.productinfojson.ProductInfo;
+import com.sams.test.productdetails.ProductDetailActivity;
 
 import java.util.List;
 
