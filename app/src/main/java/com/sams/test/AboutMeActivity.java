@@ -1,4 +1,4 @@
-package com.sams.test.products;
+package com.sams.test;
 
 /**
  * Used to display about me, currently not shown
