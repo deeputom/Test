@@ -78,12 +78,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         ab.setDisplayShowHomeEnabled(true);
         mProductDetailPresenter = ProductDetailPresenter.getInstance(Injection.provideRepository(this));
         mCurrentPosition = getIntent().getIntExtra(ViewConstants.PROD_LIST_POSITION, 0);
-        mCurrentTotalSize = getIntent().getIntExtra(ViewConstants.CURR_TOTAL_SIZE, 0);
+        int totalSize = getIntent().getIntExtra(ViewConstants.CURR_TOTAL_SIZE, 0);
+        //Since we can only start from mCurrentPosition till the end
+        mCurrentTotalSize = mCurrentTotalSize - (mCurrentTotalSize-1-mCurrentPosition);
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
-
      }
 
     /**
@@ -98,7 +99,6 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-
             ProductDetailFragment productDetailFragment = new ProductDetailFragment();
             int adjustedPos = (mCurrentPosition >= position) ? mCurrentPosition-position
                     : mCurrentPosition+position;
