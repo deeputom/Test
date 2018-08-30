@@ -90,6 +90,14 @@ public class AppUtils {
         return success;
     }
 
+    /**
+     * Not Used
+     * @param input
+     * @param output
+     * @return
+     * @throws Exception
+     * @throws IOException
+     */
     public static int copy(InputStream input, OutputStream output) throws Exception, IOException {
         final int BUFFER_SIZE = 1024 * 2;
         byte[] buffer = new byte[BUFFER_SIZE];
@@ -119,6 +127,11 @@ public class AppUtils {
         return count;
     }
 
+    /**
+     * Not used
+     * @param in
+     * @return
+     */
     public static String print(InputStream in){
         StringBuilder result;
         try {

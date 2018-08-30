@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sams.test.products;
+package com.sams.test.productdetails;
 
 import com.sams.test.BasePresenter;
 import com.sams.test.BaseView;
@@ -23,21 +23,13 @@ import com.sams.test.data.productinfojson.ProductInfo;
 import java.util.List;
 
 /**
- * This specifies the contract between the Product list view and the presenter.
+ * This specifies the contract between the view and the presenter.
+ * This interface is just to be a dummy between the view and model
  */
-public interface IProductContract {
-
-    interface View extends BaseView<Presenter> {
-        void setLoadingIndicator(final boolean active);
-        boolean isActive();
-        void showProducts(List<ProductInfo> products);
-        void onError(String error);
-    }
+public interface IProductDetailContract {
 
     interface Presenter extends BasePresenter {
-        void getImageDetails(int index);
-        int getTotalProdutCount();
-        void loadProducts(final boolean showLoadingUI, int index);
-        void invalidate();
+        // Only get the index that is already loaded.
+        ProductInfo get(int index);
     }
 }

@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,9 +18,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.sams.test.R;
+import com.sams.test.ViewConstants;
 import com.sams.test.data.productinfojson.ProductInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,7 +83,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ProductListAdapter.CustomViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ProductListAdapter.CustomViewHolder viewHolder, final int position) {
         if ((mProductInfoList == null) || position > mProductInfoList.size()-1) {
             // We are loading more, return
             viewHolder.productImageView.setVisibility(View.INVISIBLE);
@@ -103,7 +101,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         ((CustomViewHolder) viewHolder).itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProdListner.onProductSelected(productInfo);
+                mProdListner.onProductSelected(mProductInfoList.size()-1 - position,
+                        mProductInfoList.size());
             }
         });
 

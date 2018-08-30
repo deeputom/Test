@@ -25,19 +25,22 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
+import com.sams.test.Injection;
 import com.sams.test.R;
+import com.sams.test.ViewConstants;
 import com.sams.test.data.ProductsRepository;
 import com.sams.test.data.productinfojson.ProductInfo;
-import com.sams.test.products.ProductDetailFragment;
+import com.sams.test.productdetails.ProductDetailFragment;
 
 /**
  * Displays Product details screen.
- * Right now it only has one fragment, {@link ProductDetailFragment}
+ * @see {@link ProductDetailFragment}
  */
 public class ProductDetailActivity extends AppCompatActivity {
 
-    public static final String EXTRA_TASK_ID = "TASK_ID";
+    public static final String LOG_TAG = "ProductDetailActivity";
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -50,10 +53,21 @@ public class ProductDetailActivity extends AppCompatActivity {
      */
     private PagerAdapter mPagerAdapter;
 
+    /**
+     * Current position of the list item selected by user
+     */
+    private int mCurrentPosition;
+
+    /**
+     * current total size displayed in adapter list view
+     */
+    private int mCurrentTotalSize;
+    private IProductDetailContract.Presenter mProductDetailPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d(LOG_TAG, "onCreate");
         setContentView(R.layout.product_detailed_container);
 
         // Set up the toolbar.
@@ -62,22 +76,20 @@ public class ProductDetailActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
-
+        mProductDetailPresenter = ProductDetailPresenter.getInstance(Injection.provideRepository(this));
+        mCurrentPosition = getIntent().getIntExtra(ViewConstants.PROD_LIST_POSITION, 0);
+        mCurrentTotalSize = getIntent().getIntExtra(ViewConstants.CURR_TOTAL_SIZE, 0);
         // Instantiate a ViewPager and a PagerAdapter.
-/*        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(mPagerAdapter);*/
+        mPager.setAdapter(mPagerAdapter);
 
-        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
-        // add fragment to the fragment container layout
-        getSupportFragmentManager().beginTransaction().replace(R.id.product_detail_fragment_container,
-                productDetailFragment).commit();
-        productDetailFragment.showProductDetails(
-                ProductInfo.getFromBundle(getIntent().getExtras()));
-    }
+     }
 
     /**
-     *
+     * Swipe view works only from the starting postion to the end where the list is loaded.
+     * Swipe cannot go back the place where the swipe is started.
+     * Also it cannot load the the items that is not yet downloaded
      */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -86,12 +98,18 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ProductDetailFragment();
+
+            ProductDetailFragment productDetailFragment = new ProductDetailFragment();
+            int adjustedPos = (mCurrentPosition >= position) ? mCurrentPosition-position
+                    : mCurrentPosition+position;
+            productDetailFragment.showProductDetails(
+                    mProductDetailPresenter.get(adjustedPos));
+            return productDetailFragment;
         }
 
         @Override
         public int getCount() {
-            return 10;
+            return mCurrentTotalSize;
         }
     }
 

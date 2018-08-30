@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sams.test.R;
+import com.sams.test.ViewConstants;
 import com.sams.test.data.productinfojson.ProductInfo;
 import com.sams.test.productdetails.ProductDetailActivity;
 
@@ -123,7 +124,7 @@ public class ProductListFragment extends Fragment implements IProductContract.Vi
                 loadMore();
                 break;
             case R.id.about_me:
-                Intent intent = new Intent(getActivity(), AboutMeActivity.class);
+                Intent intent = new Intent(getActivity(), com.sams.test.products.AboutMeActivity.class);
                 getActivity().startActivity(intent);
                 break;
         }
@@ -171,11 +172,7 @@ public class ProductListFragment extends Fragment implements IProductContract.Vi
 
                         int lastVisibleItem = mLayoutManager
                                 .findLastVisibleItemPosition();
-                        Log.d(LOG_TAG, "onScrolled: lastVisibleItem: " + lastVisibleItem);
-                        Log.d(LOG_TAG, "onScrolled: mLoading: " + mLoading);
-                        Log.d(LOG_TAG, "onScrolled: getCurrCount: " + mAdapter.getCurrCount());
-                        Log.d(LOG_TAG, "onScrolled: mAdapter.isAllItemsDisplayed(): " + mAdapter.isAllItemsDisplayed());
-                        if ((false == mLoading) // Not loading
+                         if ((false == mLoading) // Not loading
                                 && (false == mAdapter.isAllItemsDisplayed()) // Not fully downloaded
                                 && (mAdapter.getCurrCount()-1 < (lastVisibleItem + VISIBLE_TRESHOLD))) { // User scrolling more
                             // End has been reached, load more
@@ -232,9 +229,10 @@ public class ProductListFragment extends Fragment implements IProductContract.Vi
     }
 
     @Override
-    public void onProductSelected(ProductInfo productInfo) {
+    public void onProductSelected(int position, int currentTotalSize) {
         Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
-        intent.putExtras(productInfo.getAsBundle());
+        intent.putExtra(ViewConstants.PROD_LIST_POSITION, position);
+        intent.putExtra(ViewConstants.CURR_TOTAL_SIZE, currentTotalSize);
         getActivity().startActivity(intent);
     }
 

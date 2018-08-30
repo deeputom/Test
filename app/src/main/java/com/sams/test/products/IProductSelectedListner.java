@@ -8,5 +8,5 @@ import com.sams.test.data.productinfojson.ProductInfo;
  */
 
 public interface IProductSelectedListner {
-    void onProductSelected(ProductInfo productInfo);
+    void onProductSelected(int position, int currTotSize);
 }

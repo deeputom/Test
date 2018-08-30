@@ -21,7 +21,7 @@ import java.util.List;
  *  Repository for getting json response product array from server.
  *  Strategy is like this
  *  1. check in local cache
- *  2. check in SQLite DB
+ *  2. TODO check in SQLite DB
  *  3. download from server
  */
 
@@ -102,7 +102,7 @@ public class ProductsRepository implements IProductRepository {
         }
 
         /**
-         * Case 2: check in persistent storage
+         * TODO Case 2: check in persistent storage
          */
 
         /**
@@ -115,6 +115,7 @@ public class ProductsRepository implements IProductRepository {
                 if ((false == mProductInfoCache.isEmpty())
                         && (getTotalProductCount() == mProductInfoCache.size())) {
                     // Max products already downloaded, nothing more in server
+                    // TODO save in persistent srorage
                     Log.i(LOG_TAG, "Already loaded max products");
                     callback.onProductsLoaded(mProductInfoCache);
                     return;
@@ -134,6 +135,14 @@ public class ProductsRepository implements IProductRepository {
                 callback.onDataNotAvailable();
             }
         });
+    }
+
+    @Override
+    public ProductInfo loadProduct(int index) {
+        if (index <= mProductInfoCache.size()-1)  {
+            return mProductInfoCache.get(index);
+        }
+        return null;
     }
 
     @Override

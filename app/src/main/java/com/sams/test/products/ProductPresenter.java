@@ -14,12 +14,12 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Presenter in MVP pattern.
+ * Presenter between list view and model
  * intermediate between view and model
  */
 
 public class ProductPresenter implements IProductContract.Presenter {
-    private static final String LOG_TAG = "ProductPresenter";
+    private static final String LOG_TAG = "ProductDetailPresenter";
     private IProductRepository mProductsRepository;
     private IProductContract.View mProductView;
 
