@@ -3,6 +3,7 @@ package com.sams.test;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.sams.test.data.productinfojson.remote.FakeRemoteDataSource;
 import com.sams.test.util.AppExecutors;
 import com.sams.test.data.productinfojson.IProductInfoSource;
 import com.sams.test.data.IProductRepository;
