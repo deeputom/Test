@@ -1,6 +1,5 @@
 package com.sams.test.products;
 
-import com.sams.test.data.productinfojson.ProductInfo;
 
 /**
  * Defining callback that is called when a prodcut item is selected from ProductListAdapter

@@ -25,7 +25,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- * Created by deepu on 8/26/2018.
+ * Implementation of data source that comes from walmart server using rest api.
+ * It will download json that describes the product list and info
  */
 
 public class JsonDownload implements IProductInfoSource {
@@ -36,7 +37,6 @@ public class JsonDownload implements IProductInfoSource {
     private static JsonDownload INSTANCE;
     private IJsonParser mJsonParser;
     private Context mContext;
-    private int mTotalProducts;
 
     // Prevent direct instantiation.
     private JsonDownload(@NonNull AppExecutors appExecutors,
@@ -44,7 +44,6 @@ public class JsonDownload implements IProductInfoSource {
         mAppExecutors = appExecutors;
         mJsonParser = jsonParser;
         mContext = context;
-        mTotalProducts = 0;
     }
 
     public static JsonDownload getInstance(@NonNull AppExecutors appExecutors,
@@ -73,15 +72,6 @@ public class JsonDownload implements IProductInfoSource {
         builder.append("https://mobile-tha-server.appspot.com/walmartproducts/");
         builder.append(pageIndex);
         int productsToGet = 30;
-/*        if (pageIndex > 1) {
-            // Make sure we have enough products in the last page
-            // TODO what if first page has less than 30 products?
-            int currMax = pageIndex *30;
-            if (currMax > mTotalProducts) {
-                //
-                productsToGet = currMax - mTotalProducts;
-            }
-        }*/
         builder.append("/");
         builder.append(productsToGet); // Always get the max possible download.
         return builder.toString();
@@ -123,8 +113,6 @@ public class JsonDownload implements IProductInfoSource {
                             if (productInfos == null || productInfos.isEmpty()) {
                                 callback.onDataNotAvailable();
                             } else {
-                                int startingIndex = (mJsonParser.getPageIndex()-1)*30;
-                                mTotalProducts = mJsonParser.getTotalProductCount();
                                 callback.onProductsLoaded(productInfos);
                             }
                         }
@@ -145,29 +133,6 @@ public class JsonDownload implements IProductInfoSource {
         return mJsonParser.getTotalProductCount();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @VisibleForTesting
-    private void printFile (File file) {
-        if (file.exists()) {
-
-
-            try{
-         BufferedReader br =
-                new BufferedReader(new InputStreamReader(new FileInputStream(file),
-                    StandardCharsets.UTF_8)) ;
-                String line = null;
-                while ((line = br.readLine()) != null) {
-                    Log.d(LOG_TAG, "Json content: " + line);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            Log.d(LOG_TAG, "printFile file not found");
-        }
-    }
-
     private void failed(@NonNull final LoadProductsCallback callback, String message) {
         Log.e(LOG_TAG, "error: " + message);
         mAppExecutors.mainThread().execute(new Runnable() {
@@ -178,19 +143,6 @@ public class JsonDownload implements IProductInfoSource {
             }
         });
     }
-
-    @VisibleForTesting
-    private FileOutputStream getStreamToWrite(String fileName) {
-        File file = new File(mContext.getFilesDir(), fileName);
-        FileOutputStream outputStream = null;
-        try {
-            outputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return outputStream;
-    }
-
 
     @Override
     public void loadProduct(@NonNull String productId, @NonNull LoadProductCallback callback) {

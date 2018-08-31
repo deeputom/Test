@@ -32,7 +32,7 @@ public class ProductsRepository implements IProductRepository {
      */
     private IProductInfoSource mProductLocalSource;
     /**
-     * Fectes the products from remote url
+     * Fetches the products from remote url
      */
     private IProductInfoSource mRemoteDataSource;
     /**
@@ -45,10 +45,6 @@ public class ProductsRepository implements IProductRepository {
      * Total count of the product, that we know so far.
      */
     private int mTotalProductCount;
-    /**
-     * current number of products that we have
-     */
-    private int mCurrCount;
     /**
      * Static instance of repository
      */
@@ -81,7 +77,6 @@ public class ProductsRepository implements IProductRepository {
     @Override
     public void invalidate() {
         mProductInfoCache.clear();
-        mCurrCount = 0;
         mTotalProductCount = 0;
     }
 
@@ -123,7 +118,6 @@ public class ProductsRepository implements IProductRepository {
                 }
                 int totalToCopy = startingIndex +  products.size();
                 for (int count = 0, i = startingIndex; i< totalToCopy; i++, count++) {
-                    mCurrCount++;
                     mProductInfoCache.add(i, products.get(count));
                 }
                 callback.onProductsLoaded(mProductInfoCache);

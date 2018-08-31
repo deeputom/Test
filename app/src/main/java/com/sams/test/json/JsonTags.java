@@ -1,7 +1,7 @@
 package com.sams.test.json;
 
 /**
- * Created by deepu on 8/24/2018.
+ * JSON tags in JSON payload
  */
 
 public class JsonTags {

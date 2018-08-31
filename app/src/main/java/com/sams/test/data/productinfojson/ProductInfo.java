@@ -25,6 +25,10 @@ import java.lang.reflect.Type;
 
 /**
  * Immutable model class for a ProductInfo.
+ * This class serves as Data access table for products table
+ * @see {@link com.sams.test.data.productinfojson.local.IProductInfoDao}
+ * Also for de-serializing JSON product info payload.
+ * @see {@link com.sams.test.json.JsonParser}
  */
 @Entity(tableName = "ProductInfo")
 public final class ProductInfo {
@@ -104,35 +108,6 @@ public final class ProductInfo {
         this.productname = productname;
     }
 
-    public Bundle getAsBundle() {
-        Bundle bundle = new Bundle();
-        bundle.putString(JsonTags.productId, id);
-        bundle.putString(JsonTags.productImage, imgurl);
-        bundle.putString(JsonTags.shortDescription, shortdescription);
-        bundle.putString(JsonTags.longDescription, longdescription);
-        bundle.putString(JsonTags.price, price);
-        bundle.putString(JsonTags.reviewRating, rating);
-        bundle.putString(JsonTags.reviewCount, reviewcount);
-        bundle.putBoolean(JsonTags.inStock, instock);
-        bundle.putString(JsonTags.productName, productname);
-        return bundle;
-    }
-
-    public static ProductInfo getFromBundle(Bundle bundle) {
-        String id = bundle.getString(JsonTags.productId);
-        String productImage = bundle.getString(JsonTags.productImage, "");
-        String shortDescription = bundle.getString(JsonTags.shortDescription, "");
-        String longDescription = bundle.getString(JsonTags.longDescription);
-        String price = bundle.getString(JsonTags.price);
-        String rating = bundle.getString(JsonTags.reviewRating);
-        String reviewCount = bundle.getString(JsonTags.reviewCount);
-        boolean inStock = bundle.getBoolean(JsonTags.inStock);
-        String productName = bundle.getString(JsonTags.productName);
-        ProductInfo productInfo = new ProductInfo(id, productImage,
-                shortDescription, longDescription, price,
-                rating, reviewCount, inStock, productName);
-        return productInfo;
-    }
     @NonNull
     public String getId() {
         return id;

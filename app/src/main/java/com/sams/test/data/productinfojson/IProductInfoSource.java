@@ -23,7 +23,7 @@ import com.sams.test.data.productinfojson.ProductInfo;
 import java.util.List;
 
 /**
- * Main entry point for accessing tasks data.
+ * Main entry point for accessing Products data.
  * <p>
  * For simplicity, only loadProducts() and loadProduct() have callbacks. Consider adding callbacks to other
  * methods to inform the user of network/database errors or successful operations.

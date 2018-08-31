@@ -15,9 +15,9 @@ import com.sams.test.json.JsonParser;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Created by deepu on 8/24/2018.
+ * Enables injection of production implementations for {@link IProductRepository}
+ * at complile time
  */
-
 public class Injection {
     public static IProductRepository provideRepository(@NonNull Context context) {
         checkNotNull(context);

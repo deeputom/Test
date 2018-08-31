@@ -13,7 +13,7 @@ import com.sams.test.data.productinfojson.ProductInfo;
 import java.lang.reflect.Type;
 
 /**
- * Created by deepu on 8/24/2018.
+ * This class parses the product info in the JSON payload.
  */
 
 public class JsonResponse {

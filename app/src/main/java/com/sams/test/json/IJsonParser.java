@@ -12,8 +12,8 @@ import java.util.List;
  */
 
 public interface IJsonParser {
-    public boolean parse(InputStream file);
-    public List<ProductInfo> getProducts();
-    public int getPageIndex();
-    public int getTotalProductCount();
+    boolean parse(InputStream file);
+    List<ProductInfo> getProducts();
+    int getPageIndex();
+    int getTotalProductCount();
 }

@@ -14,7 +14,7 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Presenter between list view and model
+ * Presenter between list view {@link ProductMainActivity} and model {@link ProductsRepository}
  * intermediate between view and model
  */
 
@@ -23,9 +23,9 @@ public class ProductPresenter implements IProductContract.Presenter {
     private IProductRepository mProductsRepository;
     private IProductContract.View mProductView;
 
-    public ProductPresenter(@NonNull IProductRepository tasksRepository,
+    public ProductPresenter(@NonNull IProductRepository productRepository,
                             @NonNull IProductContract.View productView) {
-        mProductsRepository = checkNotNull(tasksRepository,
+        mProductsRepository = checkNotNull(productRepository,
                 "Product Repository cannot be null");
         mProductView = checkNotNull(productView, "product view cannot be null!");
         mProductView.setPresenter(this);

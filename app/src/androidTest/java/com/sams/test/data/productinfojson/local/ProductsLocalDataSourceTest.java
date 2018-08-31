@@ -54,9 +54,9 @@ public class ProductsLocalDataSourceTest {
     public void getProducts() throws Exception {
         mProductsLocalDataSource.loadProducts(10, new IProductInfoSource.LoadProductsCallback() {
             @Override
-            public void onProdcutsLoaded(List<ProductInfo> tasks) {
-                System.out.println(tasks.size());
-                assertThat(tasks.size(), is(10));
+            public void onProductsLoaded(List<ProductInfo> productInfoList) {
+                System.out.println(productInfoList.size());
+                assertThat(productInfoList.size(), is(10));
             }
 
             @Override

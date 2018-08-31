@@ -31,8 +31,6 @@ import java.util.List;
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.CustomViewHolder> {
     private final String LOG_TAG = "ProductListAdapter";
     private List<ProductInfo> mProductInfoList;
-    private final int VIEW_ITEM = 1;
-    private final int VIEW_PROG = 0;
     private Fragment mCallingFragment;
     private int mTotalCount;
     private IProductSelectedListner mProdListner;
@@ -84,8 +82,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(ProductListAdapter.CustomViewHolder viewHolder, final int position) {
+
         if ((mProductInfoList == null) || position > mProductInfoList.size()-1) {
-            // We are loading more, return
+            /**
+             * Data is not available it, show loading in rating view as it is in the center.
+             * Hide other views
+             */
             viewHolder.productImageView.setVisibility(View.INVISIBLE);
             viewHolder.productShortDescView.setVisibility(View.INVISIBLE);
             viewHolder.productPriceView.setVisibility(View.INVISIBLE);
@@ -93,12 +95,20 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             viewHolder.productRating.setText("loading...");
             return;
         }
+
+        /**
+         * Data is available, show the products
+         */
         viewHolder.productImageView.setVisibility(View.VISIBLE);
         viewHolder.productShortDescView.setVisibility(View.VISIBLE);
         viewHolder.productPriceView.setVisibility(View.VISIBLE);
 
+        /**
+         * Add the listner when the list item is selected so that we can show the full product
+         * details in {@link com.sams.test.productdetails.ProductDetailFragment}
+         */
         final ProductInfo productInfo=  mProductInfoList.get(mProductInfoList.size()-1 - position);
-        ((CustomViewHolder) viewHolder).itemView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mProdListner.onProductSelected(mProductInfoList.size()-1 - position,
@@ -106,6 +116,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             }
         });
 
+        /**
+         * Display thumbnail image
+         */
         Glide.with(mCallingFragment)
                 .load(productInfo.getImgurl())
                 .transition(DrawableTransitionOptions.withCrossFade())
@@ -115,6 +128,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 .into(viewHolder.productImageView);
 
 
+        /**
+         * Display price, rating and short description
+         */
         viewHolder.productPriceView.setText(productInfo.getPrice());
         // Todo dont hard code "Rating", have it in strings.xml for localization
         viewHolder.productRating.setText("Rating: " + productInfo.getRating());

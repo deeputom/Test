@@ -44,9 +44,9 @@ public class JsonDownloadTest {
     public void loadProductsTest() {
         mJsonDownload.loadProducts(1, new IProductInfoSource.LoadProductsCallback() {
             @Override
-            public void onProdcutsLoaded(List<ProductInfo> tasks) {
-                Log.d(LOG_TAG, "loadProductsTest size: " + tasks.size());
-                assertThat(tasks.size(), not(0));
+            public void onProductsLoaded(List<ProductInfo> products) {
+                Log.d(LOG_TAG, "loadProductsTest size: " + products.size());
+                assertThat(products.size(), not(0));
             }
 
             @Override

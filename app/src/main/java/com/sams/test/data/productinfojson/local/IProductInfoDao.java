@@ -26,7 +26,7 @@ import com.sams.test.data.productinfojson.ProductInfo;
 import java.util.List;
 
 /**
- * Data Access Object for the Prodcuts table.
+ * Data Access Object for the Products table.
  */
 @Dao
 public interface IProductInfoDao {
@@ -34,7 +34,7 @@ public interface IProductInfoDao {
     /**
      * Select all Products from the Products table.
      *
-     * @return all tasks.
+     * @return all Products.
      */
     @Query("SELECT * FROM ProductInfo")
     List<ProductInfo> getProducts();

@@ -2,7 +2,8 @@ package com.sams.test.productdetails;
 
 
 /**
- * Created by deepu on 8/24/2018.
+ * This fragment is responsible for displaying product details.
+ * it is instantiated from the {@link @{@link com.sams.test.productdetails.ProductDetailActivity}}
  */
 
 import android.databinding.DataBindingUtil;
@@ -28,7 +29,6 @@ import com.sams.test.ViewConstants;
 public class ProductDetailFragment extends Fragment {
     public static final String LOG_TAG = "ProductDetailFragment";
 
-    private int mCurrentPosition = -1;
     private ProductDetailsBinding mBinding;
     private ImageView mImageView;
     private ProductInfo mProductInfo;

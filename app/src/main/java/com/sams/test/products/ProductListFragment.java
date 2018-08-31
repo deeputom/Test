@@ -68,6 +68,7 @@ public class ProductListFragment extends Fragment implements IProductContract.Vi
 
     /**
      * Get the uptodate information of list of products from presenter
+     * from {@link com.sams.test.data.ProductsRepository}
      * @param products
      */
     @Override
@@ -87,6 +88,10 @@ public class ProductListFragment extends Fragment implements IProductContract.Vi
         }
     }
 
+    /**
+     * callback when the there is error in displaying the products from {@link com.sams.test.data.ProductsRepository}
+     * @param error
+     */
     @Override
     public void onError(String error) {
         Log.d(LOG_TAG, "onError: ");
@@ -212,6 +217,9 @@ public class ProductListFragment extends Fragment implements IProductContract.Vi
         mErrorTextView.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * Requests to load more products from the repository
+     */
     private void loadMore() {
         Log.d(LOG_TAG, "loadMore from: " + mAdapter.getCurrCount());
         hideErrorText();
@@ -224,11 +232,21 @@ public class ProductListFragment extends Fragment implements IProductContract.Vi
         super.onDestroyView();
     }
 
+    /**
+     * called form the {@link ProductPresenter} when the activity({@link ProductMainActivity}
+     * is created.
+     * @param presenter
+     */
     @Override
     public void setPresenter(IProductContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
+    /**
+     * Callback when products is selected from the {@link ProductListAdapter}
+     * @param position
+     * @param currentTotalSize
+     */
     @Override
     public void onProductSelected(int position, int currentTotalSize) {
         Intent intent = new Intent(getActivity(), ProductDetailActivity.class);

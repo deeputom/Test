@@ -28,7 +28,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by deepu on 8/24/2018.
+ * JSON parser for parsing JSON fetched from server
  */
 
 public class JsonParser implements IJsonParser{
